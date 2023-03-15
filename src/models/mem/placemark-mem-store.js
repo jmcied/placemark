@@ -8,6 +8,10 @@ export const placemarkMemStore = {
     return placemarks;
   },
 
+  async getUserPlacemarks(userid) {
+    return placemarks.filter((placemark) => placemark.userid === userid);
+  },
+
   async addPlacemark(placemark) {
     placemark._id = v4();
     placemarks.push(placemark);
@@ -28,10 +32,6 @@ export const placemarkMemStore = {
 
   async deleteAllPlacemarks() {
     placemarks = [];
-  },
-
-  async getUserPlacemark(userid) {
-    return placemarks.filter((placemark) => placemark.userid === userid);
   },
 
 };
