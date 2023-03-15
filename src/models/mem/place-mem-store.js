@@ -3,41 +3,41 @@ import { v4 } from "uuid";
 let places = [];
 
 export const placeMemStore = {
-  async getAllplaces() {
+  async getAllPlaces() {
     return places;
   },
 
-  async addplace(placemarkId, place) {
+  async addPlace(placemarkId, place) {
     place._id = v4();
     place.placemarkid = placemarkId;
     places.push(place);
     return place;
   },
 
-  async getplacesByplacemarkId(id) {
+  async getPlacesByPlacemarkId(id) {
     return places.filter((place) => place.placemarkid === id);
   },
 
-  async getplaceById(id) {
+  async getPlaceById(id) {
     return places.find((place) => place._id === id);
   },
 
-  async getplacemarkplaces(placemarkId) {
+  async getPlacemarkPlaces(placemarkId) {
     return places.filter((place) => place.placemarkid === placemarkId);
   },
 
-  async deleteplace(id) {
+  async deletePlace(id) {
     const index = places.findIndex((place) => place._id === id);
     places.splice(index, 1);
   },
 
-  async deleteAllplaces() {
+  async deleteAllPlaces() {
     places = [];
   },
 
-  async updateplace(place, updatedplace) {
-    place.title = updatedplace.title;
-    place.category = updatedplace.category;
-    place.description = updatedplace.description;
+  async updatePlace(place, updatedPlace) {
+    place.title = updatedPlace.title;
+    place.category = updatedPlace.category;
+    place.description = updatedPlace.description;
   },
 };

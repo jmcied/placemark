@@ -1,5 +1,5 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import { v4 } from "uuid";
+import { placeMemStore } from "./place-mem-store.js";
 
 let placemarks = [];
 
@@ -21,7 +21,7 @@ export const placemarkMemStore = {
 
   async getPlacemarkById(id) {
     const list = placemarks.find((placemark) => placemark._id === id);
-    list.places = await placemarkMemStore.getPlacesByPlacemarkId(list._id);
+    list.places = await placeMemStore.getPlacesByPlacemarkId(list._id);
     return list;
   },
 
