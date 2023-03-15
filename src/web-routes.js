@@ -22,6 +22,6 @@ export const webRoutes = [
   { method: "POST", path: "/placemark/{id}/addplace", config: placemarkController.addPlace },
 
   { method: "GET", path: "/dashboard/deleteplacemark/{id}", config: dashboardController.deletePlacemark },
-  { method: "GET", path: "/placemark/{id}/deleteplacemark/{placeid}", config: placemarkController.deletePlace },
+  { method: "GET", path: "/placemark/{id}/deleteplace/{placeid}", config: placemarkController.deletePlace },
 
 ];
