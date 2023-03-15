@@ -4,27 +4,34 @@ import { v4 } from "uuid";
 let placemarks = [];
 
 export const placemarkMemStore = {
-  async getAllplacemarks() {
+  async getAllPlacemarks() {
     return placemarks;
   },
 
-  async addplacemark(placemark) {
+  async addPlacemark(placemark) {
     placemark._id = v4();
     placemarks.push(placemark);
     return placemark
 ;
   },
 
-  async getplacemarkById(id) {
-    return placemarks.find((placemark) => placemark._id === id);
+  async getPlacemarkById(id) {
+    const list = placemarks.find((placemark) => placemark._id === id);
+    list.places = await placemarkMemStore.getPlacesByPlacemarkId(list._id);
+    return list;
   },
 
-  async deleteplacemarkById(id) {
+  async deletePlacemarkById(id) {
     const index = placemarks.findIndex((placemark) => placemark._id === id);
     placemarks.splice(index, 1);
   },
 
-  async deleteAllplacemarks() {
+  async deleteAllPlacemarks() {
     placemarks = [];
   },
+
+  async getUserPlacemark(userid) {
+    return placemarks.filter((placemark) => placemark.userid === userid);
+  },
+
 };

@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import { v4 } from "uuid";
 
 let users = [];
