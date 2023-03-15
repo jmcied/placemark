@@ -1,4 +1,5 @@
 import { db } from "../models/db.js";
+import { UserSpec, } from "../models/joi-schemas.js";
 
 db.init();                          // hotfix - error (Cannot read properties of null (reading 'addUser') 
                                     // call db.init() before any methods are called on db.userStore
@@ -18,6 +19,13 @@ export const accountsController = {
   },
   signup: {
     auth: false,
+    validate: {
+      payload: UserSpec,
+      options: { abortEarly: false },
+      failAction: function (request, h, error) {
+        return h.view("signup-view", { title: "Sign up error", errors: error.details }).takeover().code(400);
+      },
+    },
     handler: async function (request, h) {
       const user = request.payload;
       await db.userStore.addUser(user);
