@@ -1,3 +1,16 @@
 {
-    "playlists": []
-  }
+  "placemarks": [
+    {
+      "title": "Forest Trails",
+      "_id": "db466d5b-6081-48e4-a829-9618bfa975fd"
+    },
+    {
+      "title": "Beach Walks",
+      "_id": "15ecd09e-a78c-47da-9ab3-7a0d1cf470ac"
+    },
+    {
+      "title": "Mountain Hikes",
+      "_id": "a241d97c-b042-4c30-bb8d-5515f773d63f"
+    }
+  ]
+}
