@@ -1,4 +1,4 @@
-import { playtimeService } from "./playtime-service.js";
+import { placemarkService } from "./placemark-service.js";
 
 suite("User API tests", () => {
   setup(async () => {
