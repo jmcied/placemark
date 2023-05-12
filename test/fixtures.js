@@ -70,3 +70,5 @@ export const maggie = {
     "category": "Beach walk",
     "description": "5km Easy Stroll"}
   ]
+
+  export const serviceUrl = "http://localhost:3000";
