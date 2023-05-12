@@ -17,6 +17,33 @@ export const userApi = {
     },
   },
 
+  deleteAll: {
+    auth: false,
+    handler: async function (request, h) {
+      try {
+        await db.userStore.deleteAll();
+        return h.response().code(204);
+      } catch (err) {
+        return Boom.serverUnavailable("Database Error");
+      }
+    },
+  },
+  
+  findOne: {
+    auth: false,
+    handler: async function (request, h) {
+      try {
+        const user = await db.userStore.getUserById(request.params.id);
+        if (!user) {
+          return Boom.notFound("No User with this id");
+        }
+        return user;
+      } catch (err) {
+        return Boom.serverUnavailable("No User with this id");
+      }
+    },
+  }, 
+
   find: {
     auth: false,
     handler: async function(request, h) {
