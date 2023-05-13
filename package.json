@@ -7,6 +7,7 @@
   "scripts": {
     "start": "node src/server.js",
     "lint": "eslint . --ext .js",
+    "dev": "npx nodemon  src/server.js",
     "test": "mocha --ui tdd test/**/*.js -exit"
   },
   "repository": {
