@@ -5,12 +5,27 @@ export const placemarkApi = {
   find: {
     auth: false,
     handler: async function (request, h) {
+      try {
+        const placemarks = await db.placemarkStore.getAllPlacemarks();
+        return placemarks;
+      } catch (err) {
+        return Boom.serverUnavailable("Database Error");
+      }
     },
   },
 
   findOne: {
     auth: false,
     async handler(request) {
+      try {
+        const placemark = await db.placemarkStore.getPlacemarkById(request.params.id);
+        if (!placemark) {
+          return Boom.notFound("No Placemark with this id");
+        }
+        return placemark;
+      } catch (err) {
+        return Boom.serverUnavailable("No Placemark with this id");
+      }
     },
   },
 
@@ -33,6 +48,16 @@ export const placemarkApi = {
   deleteOne: {
     auth: false,
     handler: async function (request, h) {
+      try {
+        const placemark = await db.placemarkStore.getPlacemarkById(request.params.id);
+        if (!placemark) {
+          return Boom.notFound("No Placemark with this id");
+        }
+        await db.placemarkStore.deletePlacemarkById(placemark._id);
+        return h.response().code(204);
+      } catch (err) {
+        return Boom.serverUnavailable("No Placemark with this id");
+      }
     },
   },
 
