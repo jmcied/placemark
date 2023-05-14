@@ -1,3 +1,25 @@
 {
-    "places": []
-  }
+  "places": [
+    {
+      "title": "Tintern Abbey",
+      "category": "Forest Trail",
+      "description": "7km Medium Riverwalk",
+      "_id": "100d02b6-77dc-4848-98f0-30dbf3f411fd",
+      "placemarkid": "fdf6347b-d640-449f-a5a6-dd3602006385"
+    },
+    {
+      "title": "Carrickbyrne",
+      "category": "Mountain Hike",
+      "description": "10km hard climb",
+      "_id": "41a6643f-6149-4b82-bc3d-50a32b170b7e",
+      "placemarkid": "fdf6347b-d640-449f-a5a6-dd3602006385"
+    },
+    {
+      "title": "Booley Bay",
+      "category": "Beach walk",
+      "description": "5km Easy Stroll",
+      "_id": "b16c9a6a-0f8a-4f34-abe6-a27283d14ba8",
+      "placemarkid": "fdf6347b-d640-449f-a5a6-dd3602006385"
+    }
+  ]
+}
