@@ -42,6 +42,8 @@ async updatePlace(place, updatedPlace) {
   const placeDoc = await Place.findOne({ _id: place._id });
   placeDoc.title = updatedPlace.title;
   placeDoc.category = updatedPlace.category;
+  placeDoc.longitude = updatedPlace.longitude;
+  placeDoc.latitude = updatedPlace.latitude;
   placeDoc.description = updatedPlace.description;
   await placeDoc.save();
 },

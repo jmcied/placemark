@@ -26,6 +26,8 @@ export const placemarkController = {
       const newPlace = {
         title: request.payload.title,
         category: request.payload.category,
+        longitude: request.payload.longitude,
+        latitude: request.payload.latitude,
         description: request.payload.description,
       };
       await db.placeStore.addPlace(placemark._id, newPlace);
