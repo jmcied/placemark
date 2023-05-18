@@ -1,6 +1,5 @@
 import axios from "axios";
-
-import { serviceUrl } from "../fixtures.js";
+import { maggie, serviceUrl } from "../fixtures.js";
 
 export const placemarkService = {
   placemarkUrl: serviceUrl,
@@ -16,8 +15,12 @@ export const placemarkService = {
   },
 
   async getAllUsers() {
-    const res = await axios.get(`${this.placemarkUrl}/api/users`);
-    return res.data;
+    try {
+      const res = await axios.get(`${this.placemarkUrl}/api/users`);
+      return res.data;
+    } catch (e) {
+      return null;
+    }
   },
 
   async deleteAllUsers() {
@@ -51,27 +54,37 @@ export const placemarkService = {
   },
 
   async getAllPlaces() {
-    const res = await axios.get(`${this.placemarkUrl}/api/places`);
+    const res = await axios.get(`${this.placemarkUrl}/api/tracks`);
     return res.data;
   },
 
-  async createPlace(id, place) {
-    const res = await axios.post(`${this.placemarkUrl}/api/placemarks/${id}/places`, place);
+  async createPlace(id, track) {
+    const res = await axios.post(`${this.placemarkUrl}/api/placemarks/${id}/tracks`, track);
     return res.data;
   },
 
   async deleteAllPlaces() {
-    const res = await axios.delete(`${this.placemarkUrl}/api/places`);
+    const res = await axios.delete(`${this.placemarkUrl}/api/tracks`);
     return res.data;
   },
 
   async getPlace(id) {
-    const res = await axios.get(`${this.placemarkUrl}/api/places/${id}`);
+    const res = await axios.get(`${this.placemarkUrl}/api/tracks/${id}`);
     return res.data;
   },
 
   async deletePlace(id) {
-    const res = await axios.delete(`${this.placemarkUrl}/api/places/${id}`);
+    const res = await axios.delete(`${this.placemarkUrl}/api/tracks/${id}`);
     return res.data;
+  },
+
+  async authenticate(user) {
+    const response = await axios.post(`${this.placemarkUrl}/api/users/authenticate`, user);
+    axios.defaults.headers.common.Authorization = `Bearer ${response.data.token}`;
+    return response.data;
+  },
+
+  async clearAuth() {
+    axios.defaults.headers.common.Authorization = "";
   },
 };

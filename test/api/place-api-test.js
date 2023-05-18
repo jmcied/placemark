@@ -8,15 +8,24 @@ suite("Place API tests", () => {
   let hike = null;
 
   setup(async () => {
-    await placemarkService.deleteAllPlacemarks();
-    await placemarkService.deleteAllUsers();
-    await placemarkService.deleteAllPlaces();
+    placemarkService.clearAuth();
     user = await placemarkService.createUser(maggie);
+    await placemarkService.authenticate(maggie);
+    await placemarkService.deleteAllPlacemarks();
+    await placemarkService.deleteAllPlaces();
+    await placemarkService.deleteAllUsers();
+    user = await placemarkService.createUser(maggie);
+    await placemarkService.authenticate(maggie);
     john.userid = user._id;
     hike = await placemarkService.createPlacemark(john);
   });
 
   teardown(async () => {});
+
+  test("create place", async () => {
+    const returnedPlace = await placemarkService.createPlace(hike._id, forest);
+    assertSubset(forest, returnedPlace);
+  });
 
   test("create Multiple places", async () => {
     for (let i = 0; i < testPlaces.length; i += 1) {

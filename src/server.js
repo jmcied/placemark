@@ -3,13 +3,15 @@ import Hapi from "@hapi/hapi";
 import Vision from "@hapi/vision";
 import Handlebars from "handlebars";
 import path from "path";
-import { fileURLToPath } from "url";
+import jwt from "hapi-auth-jwt2";
 import Cookie from "@hapi/cookie";
 import dotenv from "dotenv";
 import Joi from "joi";
 import HapiSwagger from "hapi-swagger";
 import Inert from "@hapi/inert";
 
+import { fileURLToPath } from "url";
+import { validate } from "./api/jwt-utils.js";
 import { webRoutes } from "./web-routes.js";
 import { db } from "./models/db.js";
 import { accountsController } from "./controllers/accounts-controller.js";
@@ -34,12 +36,13 @@ const swaggerOptions = {
 async function init() {
   const server = Hapi.server({
     port: process.env.PORT || 3000,
+    routes: { cors: true },
   });
   
-
   await server.register(Vision);
   await server.register(Cookie);
   await server.register(Inert);
+  await server.register(jwt);
 
   await server.register([
     Inert,
@@ -73,6 +76,11 @@ async function init() {
     redirectTo: "/",
     validate: accountsController.validate,
   });
+  server.auth.strategy("jwt", "jwt", {
+    key: process.env.cookie_password,
+    validate: validate,
+    verifyOptions: { algorithms: ["HS256"] }
+  });  
   server.auth.default("session");
 
   db.init("mongo");

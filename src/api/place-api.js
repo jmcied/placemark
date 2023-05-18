@@ -5,7 +5,9 @@ import { validationError } from "./logger.js";
 
 export const placeApi = {
   find: {
-    auth: false,
+    auth: {
+      strategy: "jwt",
+    },
     handler: async function (request, h) {
       try {
         const places = await db.placeStore.getAllPlaces();
@@ -14,14 +16,17 @@ export const placeApi = {
         return Boom.serverUnavailable("Database Error");
       }
     },
-    tags: ["api"],
+  /*  tags: ["api"],
     response: { schema: PlaceArraySpec, failAction: validationError },
     description: "Get all placeApi",
     notes: "Returns all placeApi",
+  */
   },
 
   findOne: {
-    auth: false,
+    auth: {
+      strategy: "jwt",
+    },
     async handler(request) {
       try {
         const place = await db.placeStore.getPlaceById(request.params.id);
@@ -33,15 +38,18 @@ export const placeApi = {
         return Boom.serverUnavailable("No place with this id");
       }
     },
-    tags: ["api"],
+  /*  tags: ["api"],
     description: "Find a Place",
     notes: "Returns a place",
     validate: { params: { id: IdSpec }, failAction: validationError },
     response: { schema: PlaceSpecPlus, failAction: validationError },
-  },
+  */
+ },
 
   create: {
-    auth: false,
+    auth: {
+      strategy: "jwt",
+    },
     handler: async function (request, h) {
       try {
         const place = await db.placeStore.addPlace(request.params.id, request.payload);
@@ -53,15 +61,18 @@ export const placeApi = {
         return Boom.serverUnavailable("Database Error");
       }
     },
-    tags: ["api"],
+  /*  tags: ["api"],
     description: "Create a place",
     notes: "Returns the newly created place",
     validate: { payload: PlaceSpec },
     response: { schema: PlaceSpecPlus, failAction: validationError },
+  */
   },
 
   deleteAll: {
-    auth: false,
+    auth: {
+      strategy: "jwt",
+    },
     handler: async function (request, h) {
       try {
         await db.placeStore.deleteAllPlaces();
@@ -70,12 +81,15 @@ export const placeApi = {
         return Boom.serverUnavailable("Database Error");
       }
     },
-    tags: ["api"],
+  /*  tags: ["api"],
     description: "Delete all placeApi",
+  */
   },
 
   deleteOne: {
-    auth: false,
+    auth: {
+      strategy: "jwt",
+    },
     handler: async function (request, h) {
       try {
         const place = await db.placeStore.getPlaceById(request.params.id);
@@ -88,8 +102,9 @@ export const placeApi = {
         return Boom.serverUnavailable("No Place with this id");
       }
     },
-    tags: ["api"],
+  /*  tags: ["api"],
     description: "Delete a place",
     validate: { params: { id: IdSpec }, failAction: validationError },
+  */
   },
 };

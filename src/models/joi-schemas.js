@@ -20,15 +20,16 @@ export const UserSpecPlus = UserSpec.keys({
   __v: Joi.number(),
 }).label("UserDetailsPlus");
 
-export const UserArray = Joi.array().items(UserSpec).label("UserArray");
+export const UserArray = Joi.array().items(UserSpecPlus).label("UserArray");
 
   export const PlaceSpec = Joi.object()
   .keys({
     title: Joi.string().required(),
     category: Joi.string().required(),
-    longitude: Joi.string().required(),
-    latitude: Joi.string().required(),
-    description: Joi.string().allow("").optional(),
+    longitude: Joi.number().required().example(52.2219),
+    latitude: Joi.number().required().example(-6.9308),
+    description: Joi.string().allow("").optional().example("5km Easy Flat Walk" ),
+    placemarkid: IdSpec,
   })
   .label("Place");
   

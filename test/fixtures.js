@@ -4,6 +4,11 @@ export const maggie = {
     email: "maggie@simpson.com",
     password: "secret",
   };
+
+  export const maggieCredentials = {
+    email: "maggie@simpson.com",
+    password: "secret",
+  };
   
   export const testUsers = [
     {
@@ -39,6 +44,8 @@ export const maggie = {
   export const forest = {
     "title": "Arthurstown",
     "category": "Forest Trail",
+    "latitude": 56.789,
+    "longitude": -6.784,
     "description": "4km medium walk"
   };
   
